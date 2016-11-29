@@ -1,0 +1,20 @@
+	<div class="main-container container">
+			<div class="notifications">
+				<div id="success-notification" class="alert alert-success animated fadeInDown">
+				  Removed Matching tiles!
+				</div>
+				<div id="error-notification" class="alert alert-warning animated fadeInDown">
+				  Tiles do not match!
+				</div>
+			</div>
+				<div id="restartGame" class="alert alert-info animated zoomIn">
+				  	<strong>Good Job!</strong>
+					<div class="text-center">
+						<button id="generateNumb" (click)="restartGame()" class="btn btn-primary">Play Again</button>
+					</div>
+				</div>
+
+			<div id="gameContainer" class="row" >
+					<div class="generatedColumn animated rotateIn col-xs-4" [id]="'col-' + i" *ngFor="let item of tilesImgArray; let i = index"  (click)="toggleTiles($event)"><img [src]="item.image"  [alt]="item.phrase"></div>
+			</div>
+		</div>
