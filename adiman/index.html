@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map">
+        <img src="adiman.png" alt="Man" width="200" id="manImg">
+
+    </div>
+    <script>
+
+  
+//  watch postion
+  const watcher = navigator.geolocation.watchPosition(function(){
+    console.log("changed");
+  });
+
+  // setTimeout(() => {
+  //   navigator.geolocation.clearWatch(watcher);
+  // }, 15000);
+
+
+navigator.geolocation.getCurrentPosition(
+  displayLocationInfo,
+  handleLocationError
+);
+
+function displayLocationInfo(position) {
+  const lng = position.coords.longitude;
+  const lat = position.coords.latitude;
+
+  
+  console.log(`longitude: ${lng} | latitude: ${lat}`);
+  
+  if(document.getElementById('manImg').src == "man.png"){
+      
+  }
+  else if(document.getElementById('manImg').src == "adiman.png"){
+    document.getElementById('manImg').src = "man.png"
+  }
+
+
+}
+
+function handleLocationError(error) {
+  console.log("errorororor");
+  switch (error.code) {
+    case 3:
+      // timeout was hit, meaning nothing's in the cache
+      // let's provide a default location:
+      //displayLocationInfo({ coords: { longitude: 33.631839, latitude: 27.380583 } });
+      //displayLocationInfo({ coords: { longitude: 73.83936849999999, latitude: 18.4401868 } });
+      // now let's make a non-cached request to get the actual position
+      navigator.geolocation.getCurrentPosition(displayLocationInfo, handleLocationError);
+      break;
+    case 2:
+      // ...
+      break;
+    case 1:
+    // ...
+  }
+}
+
+function isLocationChanged(){
+  
+}
+
+function init(){
+  if (navigator.geolocation) {
+      // 🗺️ yep, we can proceed!
+      //alert('let\' proceed');
+      console.log("init");
+
+      navigator.geolocation.getCurrentPosition(displayLocationInfo);
+
+      
+    } else {
+      // no can do
+      alert('no geolocation granted');
+    }
+}
+init();
+    </script>
+
+  </body>
+</html>
